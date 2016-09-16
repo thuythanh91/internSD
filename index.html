@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Ví dụ sử dụng Directive ng-Form</title>
+        <script src="angular.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+        <script>
+            var app = angular.module('myapp', []);
+            app.controller('ExampleController', ['$scope', function($scope) {
+                $scope.list = [];
+                /*$scope.submit = function() {
+                    if($scope.text) {
+                        var text = $scope.text;
+                        $(".data").append("<div class='content'><a href='' ng-click='removeExp($index)'>X</a><input type='checkbox' ng-model='check' />" + text );
+                        $scope.text = '';
+                    }
+                };*/
+
+                $scope.getData = function(data) {
+                    if($scope.text) {
+                        $scope.list.push(data);
+                    }
+                }
+
+                $scope.removeData = function(index) {
+                    $scope.list.splice(data, 1);
+                };
+            }]);
+        </script>
+    </head>
+    <body ng-app="myapp">
+        <form ng-submit="submit()" ng-controller="ExampleController">
+            <h2>To do</h2>
+            <input type="text" ng-model="text" name="text" id="text" />
+            <input type="submit" id="submit" ng-click='getData(data)' value="Thêm" /> <br/>
+        </form>
+        <form ng-submit="submit()" ng-controller="getData">
+            <ul>
+                <li ng-repeat="data in $scope.list track by $index">
+                    <code>
+                        <input type="checkbox" />
+                        {{data}}
+                        [ <a href="" ng-click="removeData($index)">X</a> ]
+                    </code>
+                </li>
+            </ul>
+            <button>ADD</button>
+            <button>DONE</button>
+        </form>
+    </body>
+</html>
